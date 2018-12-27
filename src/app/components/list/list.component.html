@@ -1,0 +1,11 @@
+<div>
+  <div>
+    <h4>Total User: {{users.length}}</h4>
+    <h4>Graduate User: {{getGraduateCount()}}</h4>
+  </div>
+  <div  class="list">
+    <div *ngFor="let user of getGraduateOnly()">
+      <app-user [user]="user"></app-user>
+    </div>
+  </div>
+</div>
