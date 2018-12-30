@@ -1,3 +1,12 @@
-.list{
-  display: flex;
+table {
+  width: 100%;
+}
+
+td{
+  text-align: left;
+}
+
+.example-container {
+  height: 400px;
+  overflow: auto;
 }

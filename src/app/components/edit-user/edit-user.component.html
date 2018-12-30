@@ -1,0 +1,29 @@
+<div class="edit-user-popup">
+  <h1 mat-dialog-title>Edit</h1>
+  <div mat-dialog-content class="edit-user-field">
+    <mat-form-field>
+      <input matInput placeholder="Name" [(ngModel)]="data.name">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Address" [(ngModel)]="data.address">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Email" [(ngModel)]="data.email">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Age" [(ngModel)]="data.age">
+    </mat-form-field>
+    
+    <mat-radio-group class="example-radio-group" [(ngModel)]="data.gender">
+      <mat-radio-button class="example-radio-button" *ngFor="let gender of genders" [value]="gender">
+        {{gender}}
+      </mat-radio-button>
+    </mat-radio-group>
+    
+    <mat-checkbox [(ngModel)]="data.isGraduate" class="example-checkbox">Graduate</mat-checkbox>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="cancel()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="save()">Save</button>
+  </div>
+</div>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IUser } from './i-user';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { EditUserComponent } from '../edit-user/edit-user.component';
 
 @Component({
   selector: 'app-list',
@@ -9,26 +11,28 @@ import { IUser } from './i-user';
 export class ListComponent implements OnInit {
 
   users: IUser[];
-
-  constructor() { }
+  displayedColumns: string[] = ['name', 'address', 'email', 'age', 'gender', 'isGraduate', 'star'];
+  
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit() {
 
+    
     this.users = [
       {
         name: 'Ajay Kumar',
         address: 'Pune',
         email: 'ajay.kumar@gmail.com',
-        age: 25,
-        gender: 'male',
-        isGraduate: true
+        age: 15,
+        gender: 'Male',
+        isGraduate: false
       },
       {
         name: 'Prachi Shukla',
         address: 'Mumbai',
         email: 'prachi.shukla@gmail.com',
         age: 23,
-        gender: 'female',
+        gender: 'Female',
         isGraduate: true
       },
       {
@@ -36,7 +40,7 @@ export class ListComponent implements OnInit {
         address: 'Mumbai',
         email: 'sunil.verma@gmail.com',
         age: 30,
-        gender: 'male',
+        gender: 'Male',
         isGraduate: true
       },
       {
@@ -44,7 +48,7 @@ export class ListComponent implements OnInit {
         address: 'Pune',
         email: 'minal.kambale@gmail.com',
         age: 19,
-        gender: 'female',
+        gender: 'Female',
         isGraduate: false
       },
       {
@@ -52,8 +56,8 @@ export class ListComponent implements OnInit {
         address: 'Delhi',
         email: 'vijay.raj@gmail.com',
         age: 20,
-        gender: 'male',
-        isGraduate: false
+        gender: 'Male',
+        isGraduate: true
       }
     ]
   }
@@ -66,5 +70,15 @@ export class ListComponent implements OnInit {
     return this.users.filter(u => u.isGraduate).length;
   }
 
+  openDialog(data: any): void {
+    const dialogRef = this.dialog.open(EditUserComponent, {
+      data: data,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed', result);
+      // this.animal = result;
+    });
+  }
 }
 
