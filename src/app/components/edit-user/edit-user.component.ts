@@ -11,7 +11,8 @@ export class EditUserComponent implements OnInit {
   genders: string[] = ['Male', 'Female'];
   constructor(
     public dialogRef: MatDialogRef<EditUserComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {}
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
   
   ngOnInit() {
   }

@@ -21,6 +21,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
+import { UserService } from './services/user/user.service';
+import { DeleteUserComponent } from './components/delete-user/delete-user.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +35,7 @@ import { MatFormFieldModule, MatInputModule } from '@angular/material';
     ListComponent,
     UserComponent,
     EditUserComponent,
+    DeleteUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,11 +52,15 @@ import { MatFormFieldModule, MatInputModule } from '@angular/material';
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
+    MatSnackBarModule,
   ],
   entryComponents: [
     EditUserComponent,
+    DeleteUserComponent,
   ],
-  providers: [],
+  providers: [
+    UserService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
