@@ -65,7 +65,8 @@ export class UserService {
   }
 
   deleteUser(index):IUser[] {
-    return this.users.splice(index, 1);
+    this.users.splice(index, 1);
+    return this.users;
   }
 
   updateUser(user:IUser, index):IUser[] {

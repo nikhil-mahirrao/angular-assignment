@@ -12,9 +12,17 @@ import { DeleteUserComponent } from '../delete-user/delete-user.component';
 })
 export class ListComponent implements OnInit {
 
-  users: IUser[];
-  displayedColumns: string[] = ['name', 'address', 'email', 'age', 'gender', 'isGraduate', 'controls',];
-  
+  displayedColumns:string[] = ['name', 'address', 'email', 'age', 'gender', 'isGraduate', 'controls',];
+  users:IUser[];
+  newUser:IUser = {
+    name: '',
+    address: '',
+    email: '',
+    age: 18,
+    gender: 'Male',
+    isGraduate: false,
+  }
+
   constructor(
     public dialog: MatDialog, 
     public snackBar: MatSnackBar, 
@@ -29,24 +37,28 @@ export class ListComponent implements OnInit {
     return this.users.filter(u => u.isGraduate);
   }
 
-  getGraduateCount(): number {
+  getGraduateCount():number {
     return this.users.filter(u => u.isGraduate).length;
   }
 
-  openEditDialog(data: any, index: number): void {
+  openEditDialog(data:any=this.newUser, index:number=0, mode:'Add'):void {
     const dialogRef = this.dialog.open(EditUserComponent, {
-      data: { ...data, 'index': index },
+      data: { ...data, 'index':index, 'mode':mode,  },
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if(result !== undefined) {
-        const { index, ...restData } = result;
-        this.users = this.userService.updateUser(restData, index);
+        const { index, mode, ...restData } = result;
+        if(mode === 'Add') {
+          this.users = [...this.userService.addUser(restData)];
+        } else {
+          this.users = [...this.userService.updateUser(restData, index)];
+        }
       }
     });
   }
 
-  openDeleteDialog(index: number): void {
+  openDeleteDialog(index:number):void {
     const dialogRef = this.dialog.open(DeleteUserComponent, {
       data: { 'index': index },
     });
@@ -54,7 +66,7 @@ export class ListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result !== undefined) {
         const { index } = result;
-        this.users = this.userService.deleteUser(index);
+        this.users = [...this.userService.deleteUser(index)];
       }
     });
   }
